@@ -18,7 +18,8 @@ CREATE TABLE IF NOT EXISTS `admin` (
   PRIMARY KEY (`adminID`),
   UNIQUE KEY `email` (`email`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
+INSERT INTO `admin` (`adminID`, `email`,`mdp`) VALUES
+(1, 'Admin','Admin');
 -- --------------------------------------------------------
 
 --
@@ -456,5 +457,5 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 --
 
 INSERT INTO `utilisateur` (`userID`, `email`, `mdp`, `prenom`, `nom`, `dateNaissance`, `sexe`, `state`) VALUES
-(1, 'ja_aiteur@esi.dz', '$2y$10$gQ2uwa55lr.e9/HsPZ7eKOJWjpygNDr7bm2sa4wQLgv85DZyXBTfK', 'abdelatif', 'aiteur', '2001-12-15', 'homme', 1);
+(1, 'js_boudaoud@esi.dz', 'Sidou2019', 'Sid Ahmed', 'Boudaoud', '2001-05-14', 'homme', 1);
 COMMIT;

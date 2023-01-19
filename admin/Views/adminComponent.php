@@ -102,7 +102,7 @@ class adminComponent
                     <thead>
                         <tr>
                             <?php
-                            foreach ($list[0] as $key => $value) {
+                            foreach ($list as $key => $value) {
                                 echo "<th scope='col'>" . $key . "</th>";
                             }
                             ?>
