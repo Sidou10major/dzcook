@@ -1,11 +1,23 @@
+<?php
+    header('Content-type: text/css; charset: UTF-8');
+    require_once __DIR__.'/../admin/Models/params.php';
+    $paramsModel=new paramsModel();
+    $params=$paramsModel->getParams();
+    foreach($params as $param){
+        $GLOBALS[$param['cle']]=$param['valeur'];
+    }
+?>
+
 :root {
-    --primary1: #FFCE80;
-    --primary2: #E83845;
-    --secondary1: #E389B9;
-    --secondary2: #746AB0;
-    --bgRGB: 128, 128, 128;
-    --black: 0, 0, 0;
+    --primary1: <?php echo $GLOBALS['primary1']; ?>;
+    --primary2: <?php echo $GLOBALS['primary2']; ?>;
+    --secondary1: <?php echo $GLOBALS['secondary1']; ?>;
+    --secondary2: <?php echo $GLOBALS['secondary2']; ?>;
+    --bgRGB: <?php echo $GLOBALS['bgRGB']; ?>;
+    --black: <?php echo $GLOBALS['black']; ?>;
+    --body:  <?php echo $GLOBALS['body']; ?>;
 }
+
 
 * {
     margin: 0;
@@ -13,6 +25,9 @@
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
     -webkit-user-drag: none;
+}
+body{
+    background-color: rgb(var(--body));
 }
 
 a, a:visited {
@@ -166,26 +181,33 @@ menu a:active, .menu a:hover, .menu a:focus {
     color: rgb(var(--black));
     text-align: center;
 }
-.Form{
+.horizontale-container{
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 32px;
+}
+.form{
     width: 45%;
 }
-.Form .verticale-container{
+.form .horizontale-container,.form .verticale-container{
     padding: 8px 16px;
 }
-.Form label,.Form input{
+.form label,.form input{
     display:block;
     padding: 8px 16px;
 }
-.Form input{
+.form input{
     border: 1px rgba(var(--black),0.15) solid;
     border-radius: 8px;
 }
-.Form label{
+.form label{
     font-family: 'Raleway';
     font-weight: bold;
     font-size: 16px;
     color: rgb(var(--black));
 }
+
 .table-container{
     padding: 16px 32px;
     background-color: rgba(var(--bgRGB),0.5);

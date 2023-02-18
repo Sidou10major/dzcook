@@ -1,5 +1,5 @@
 <?php
-//routing
+
 
 if(isset($_GET['action'])){
     $action=$_GET['action'];
@@ -8,12 +8,16 @@ if(isset($_GET['action'])){
 }
 require_once(__DIR__.'/Controllers/userController.php');
 $controller = new userController();
-//check if action exists
+$params=$controller->getParams();
+foreach($params as $param){
+    $GLOBALS[$param['cle']]=$param['valeur'];
+}
+
 
 if($action==''){
     $controller->indexDisplay();
 }else if (method_exists($controller, $action)) {
-    //check if params exists
+    
     $controller->$action();
 } else{
     require_once('Views/404.php');

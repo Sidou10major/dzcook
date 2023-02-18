@@ -36,7 +36,7 @@
             $db=new database();
             $sql="UPDATE categorie SET titre=:name WHERE categorieID=:id";
             $stmt=$db->db->prepare($sql);
-            $stmt->execute(['name'=>$category['name'],'id'=>$category['id']]);
+            $stmt->execute(['name'=>$category['titre'],'id'=>$category['id']]);
             $db->disconnect();
         }
         // Delete category

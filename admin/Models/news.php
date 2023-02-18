@@ -4,7 +4,7 @@
         // get news
         public function getNews(){
             $db=new database();
-            $sql="SELECT newsID id,imgPath,videoPath FROM news";
+            $sql="SELECT newsID id,titre,imgPath,videoPath FROM news";
             $stmt=$db->db->prepare($sql);
             $stmt->execute();
             $result=$stmt->fetchAll();

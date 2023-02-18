@@ -1,5 +1,5 @@
 :root {
-   --primary1: #FFCE80;
+    --primary1: #FFCE80;
     --primary2: #E83845;
     --secondary1: #E389B9;
     --secondary2: #746AB0;
@@ -195,9 +195,9 @@ footer>div{
 }
 
 .card-img{
-    height: 175px;
+    height: 180px;
     object-fit: cover;
-    border-radius: 8px;
+    border-radius: 10px;
 }
 
 .card-body{
@@ -314,7 +314,7 @@ footer>div{
 }
 
 .category-header{
-    font-family: 'Raleway';
+    font-family: 'Roboto';
     font-weight: bold;
     font-size: 16px;
     color: rgb(var(--black));
@@ -343,8 +343,8 @@ footer>div{
 .list-view{
     display: flex;
     flex-direction: row;
-    padding: 8px 16px;
-    gap: 48px;
+    padding: 10px 15px;
+    gap: 50px;
     width: fit-content;
 }
 
@@ -408,9 +408,7 @@ footer>div{
     height: 46px;
     padding: 0 10px;
 }
-.rate:not(:checked) > input {
-    display: none;
-}
+
 .rate:not(:checked) > label {
     float:right;
     width:1em;
@@ -418,7 +416,7 @@ footer>div{
     white-space:nowrap;
     cursor:pointer;
     font-size:30px;
-    color:#ccc;
+    background-color: #bbb;
 }
 .rate:not(:checked) > label:before {
     content: '★ ';
@@ -455,8 +453,8 @@ footer>div{
     padding: 16px 32px;
 }
 .profile-header>img{
-    width: 320px;
-    height: 320px;
+    width: 400px;
+    height: 400px;
     object-fit: cover;
     border-radius: 50%;
 }
@@ -485,7 +483,7 @@ footer>div{
     font-size: 16px;
     color: rgba(var(--black), 0.75);
     border: 1px solid rgba(var(--black), 0.75);
-    border-radius: 8px;
+    border-radius: 10px;
 }
 .secondary-btn:hover{
     background-color: rgba(var(--black), 0.75);
@@ -496,7 +494,7 @@ footer>div{
     padding: 8px 16px;
 }
 .search{
-    width: 35%;
+    width: 40%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -536,7 +534,7 @@ footer>div{
 .filter-container{
     background-color: rgba(var(--black), 0.1);
     padding: 8px 16px;
-    border-radius: 8px;
+    border-radius: 10px;
     display: none;
 
 }
@@ -557,7 +555,7 @@ footer>div{
 
 
 .Form{
-    width: 45%;
+    width: 50%;
 }
 .Form .horizontale-container,.Form .verticale-container{
     padding: 8px 16px;
@@ -568,10 +566,10 @@ footer>div{
 }
 .Form input{
     border: 1px rgba(var(--black),0.15) solid;
-    border-radius: 8px;
+    border-radius: 10px;
 }
 .Form label{
-    font-family: 'Raleway';
+    font-family: 'Roboto';
     font-weight: bold;
     font-size: 16px;
     color: rgb(var(--black));
@@ -579,16 +577,16 @@ footer>div{
 
 .register,.login{
     display: none;
-    padding: 16px 32px;
+    padding: 15px 30px;
     background-color: rgba(var(--bgRGB),0.5);
-    border-radius: 8px;
+    border-radius: 10px;
 }
 
 
 .register>h3 ,.login>h3{
-    font-family: 'Raleway';
+    font-family: 'Roboto';
     font-weight: bold;
-    font-size: 32px;
+    font-size: 30px;
     color: rgb(var(--black));
     text-align: center;
 }
@@ -602,24 +600,24 @@ footer>div{
     color: var(--primary1);
     font-family: 'Roboto';
     font-weight: 600;
-    font-size: 16px;
+    font-size: 20px;
     cursor: pointer;
 }
 .auth-logo{
-    width: 45%;
+    width: 70%;
     height: 480px;
     object-fit: cover;
 }
 .nav-logo{
-    width: 48px;
-    height: 48px;
+    width: 50px;
+    height: 50px;
 }
 .footer-logo{
-    width: 160px;
-    height: 160px;
+    width: 300px;
+    height: 300px;
 }
 .auth-logo{
-    width: 45%;
+    width: 70%;
 }
 
 .active{
@@ -636,13 +634,13 @@ footer>div{
 }
 .contact-body{
     display: flex;
-    width: 35%;
+    width: 30%;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-radius: 8px;
-    gap: 16px;
-    padding: 16px 32px;
+    border-radius: 10px;
+    gap: 15px;
+    padding: 15px 30px;
     font-family: 'Roboto';
     background-color: rgba(var(--bgRGB),0.5);
 }

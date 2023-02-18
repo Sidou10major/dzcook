@@ -1,24 +1,17 @@
 $(document).ready(function() {
-    // Rating a recipe
     $('.rate>input').click(function(e) {
-        e.preventDefault();
         let id = $(this).parent().find('input[name="id"]').val();
-        console.log(id)
-        let data = $(this).val();
+        let rate = $(this).val();
         data = {
             id: id,
-            note: data
+            note: rate
         }
         $.post({
-            url: "/index.php/rateRecipe",
+            url: "index.php?action=rateRecipe",
             data: data,
-            success: function(response) {
-                location.reload();
-            }
         });
     })
 
-    // Filter
     $('#filter-btn').click(function(e) {
         e.preventDefault();
         $('.filter-container').toggleClass('active');
@@ -36,10 +29,9 @@ $(document).ready(function() {
         $('.register').removeClass('active');
     });
 
-    //autocomplete search
     $('#search').click(function() {
         $.get({
-            url: "/index.php/getIngredients",
+            url: "/index.php?action=getIngredients",
             success: function(response) {
                 let ingredients = JSON.parse(response);
                 let ingredientsList = [];
@@ -53,7 +45,6 @@ $(document).ready(function() {
         });
     })
 
-    // toggle add recipe
     $('#add-recipe').click(function(e) {
         e.preventDefault();
         $('.popout').toggleClass('active');

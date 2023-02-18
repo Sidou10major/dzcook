@@ -9,6 +9,4 @@ $(document).ready(function () {
         e.preventDefault();
         $('.popout').toggleClass('active');
     });
-    
-
 });

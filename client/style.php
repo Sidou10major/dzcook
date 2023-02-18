@@ -1,10 +1,21 @@
+<?php
+    header('Content-type: text/css; charset: UTF-8');
+    require_once __DIR__.'/../admin/Models/params.php';
+    $paramsModel=new paramsModel();
+    $params=$paramsModel->getParams();
+    foreach($params as $param){
+        $GLOBALS[$param['cle']]=$param['valeur'];
+    }
+?>
+
 :root {
-    --primary1: #FFCE80;
-    --primary2: #E83845;
-    --secondary1: #E389B9;
-    --secondary2: #746AB0;
-    --bgRGB: 128, 128, 128;
-    --black: 0, 0, 0;
+    --primary1: <?php echo $GLOBALS['primary1']; ?>;
+    --primary2: <?php echo $GLOBALS['primary2']; ?>;
+    --secondary1: <?php echo $GLOBALS['secondary1']; ?>;
+    --secondary2: <?php echo $GLOBALS['secondary2']; ?>;
+    --bgRGB: <?php echo $GLOBALS['bgRGB']; ?>;
+    --black: <?php echo $GLOBALS['black']; ?>;
+    --body:  <?php echo $GLOBALS['body']; ?>;
 }
 
 * {
@@ -14,7 +25,9 @@
     font-family: 'Roboto', sans-serif;
     -webkit-user-drag: none;
 }
-
+body{
+    background-color: rgb(var(--body));
+}
 a, a:visited {
     text-decoration: none;
     color: rgb(var(--black));
@@ -52,7 +65,7 @@ nav {
 
 .menu li{
     font-family: 'Raleway';
-    font-style: bold;
+    font-style: normal;
     font-weight: 700;
     cursor: pointer;
 }

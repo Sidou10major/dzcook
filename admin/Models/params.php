@@ -21,7 +21,7 @@
         }
         public function updateParams($params){
             $db=new database();
-            $sql="UPDATE params SET cle=:cle,valeur=:valeur WHERE parasID=:id";
+            $sql="UPDATE params SET cle=:cle,valeur=:valeur WHERE paramID=:id";
             $stmt=$db->db->prepare($sql);
             $stmt->execute(['cle'=>$params['cle'],'valeur'=>$params['valeur'],'id'=>$params['id']]);
             $db->disconnect();

@@ -10,12 +10,22 @@ require_once __DIR__ . '/../Models/newsPage.php';
 require_once __DIR__ . '/../Models/user.php';
 require_once __DIR__ . '/../Models/files.php';
 require_once __DIR__ . '/../Models/composent.php';
+require_once __DIR__ . '/../Models/params.php';
 class userController
 {
     protected $userComponents;
     public function __construct()
     {
         $this->userComponents = new userComponents();
+    }
+    public function initProject(){
+        $model= new paramsModel();
+        $params=$model->getParams();
+        $paramsArray=[];
+        foreach($params as $param){
+            $GLOBALS[$param['cle']]=$param['valeur'];
+        }
+        return $paramsArray;
     }
     public function authDisplay()
     {
@@ -474,4 +484,3 @@ class userController
         return $model->uploadFile($uploadFile);
     }
 }
-?>

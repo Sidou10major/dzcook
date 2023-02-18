@@ -1,5 +1,5 @@
 <?php
-    require_once __DIR__.'/../config/config.php';
+    require_once __DIR__.'/../../config/config.php';
     class database{
         public $db;
         public function __construct(){

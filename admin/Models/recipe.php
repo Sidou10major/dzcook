@@ -41,11 +41,6 @@
             $stmt=$db->db->prepare($sql);
             $stmt->execute(['id'=>$id]);
             $result['rate']=$stmt->fetch()['rate'];
-            // get user rating
-            $sql= "SELECT rate FROM recettefav WHERE recetteID=:id AND userID=:userID";
-            $stmt=$db->db->prepare($sql);
-            $stmt->execute(['id'=>$id,'userID'=>$userID]);
-            $result['userRate']=$stmt->fetch()['rate'];
             $db->disconnect();
             return $result;
         }
@@ -94,11 +89,11 @@
             $stmt->execute(['id'=>$id]);
             $db->disconnect();
         }
-        public function updateRecipe($id, $titre, $categorieID, $difficulte, $timePreparation, $timeRepo, $timeCuisson, $imgPath, $videoPath, $calories, $description){
+        public function updateRecipe($recipe){
             $db=new database();
-            $sql="UPDATE recette SET titre=:titre, categorieID=:categorieID, difficulte=:difficulte, timePreparation=:timePreparation, timeRepo=:timeRepo, timeCuisson=:timeCuisson, imgPath=:imgPath, videoPath=:videoPath, calories=:calories, description=:description WHERE recetteID=:id";
+            $sql="UPDATE recette SET titre=:titre, categorieID=:categorieID, imgPath=:imgPath, videoPath=:videoPath,state=:state WHERE recetteID=:id";
             $stmt=$db->db->prepare($sql);
-            $stmt->execute(['id'=>$id,'titre'=>$titre,'categorieID'=>$categorieID,'difficulte'=>$difficulte,'timePreparation'=>$timePreparation,'timeRepo'=>$timeRepo,'timeCuisson'=>$timeCuisson,'imgPath'=>$imgPath ,'videoPath'=>$videoPath,'calories'=>$calories,'description'=>$description]);
+            $stmt->execute(['id'=>$recipe['id'],'titre'=>$recipe['titre'],'categorieID'=>$recipe['categorieID'],'imgPath'=>$recipe['imgPath'] ,'videoPath'=>$recipe['videoPath'],'state'=>$recipe['state']]);
             $db->disconnect();
         }
         //valider recette
@@ -111,19 +106,19 @@
             return true;
         }
         //add step
-        public function addStep($recetteID, $etape, $instruction){
+        public function addStep($step){
             $db=new database();
             $sql="INSERT INTO etape (recetteID,etape,instruction) VALUES (:recetteID, :etape, :instruction)";
             $stmt=$db->db->prepare($sql);
-            $stmt->execute(['recetteID'=>$recetteID,'etape'=>$etape,'instruction'=>$instruction]);
+            $stmt->execute(['recetteID'=>$step['recetteID'],'etape'=>$step['etape'],'instruction'=>$step['description']]);
             $db->disconnect();
         }
         //delete step
-        public function deleteStep($recetteID,$etape){
+        public function deleteStep($recetteID){
             $db=new database();
-            $sql="DELETE FROM etape WHERE etape=:etape AND recetteID=:recetteID";
+            $sql="DELETE FROM etape WHERE recetteID=:recetteID";
             $stmt=$db->db->prepare($sql);
-            $stmt->execute(['etape'=>$etape,'recetteID'=>$recetteID]);
+            $stmt->execute(['recetteID'=>$recetteID]);
             $db->disconnect();
         }
         //update step

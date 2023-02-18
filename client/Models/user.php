@@ -40,9 +40,9 @@
         }
         public function updateUser($user){
             $db=new database();
-            $sql="UPDATE utilisateur SET nom=:nom,prenom=:prenom,mdp=:password,email=:email,sexe=:sexe,dateNaissance=:dateNaissance WHERE userID=:id";
+            $sql="UPDATE utilisateur SET nom=:nom,prenom=:prenom,email=:email,sexe=:sexe,dateNaissance=:dateNaissance WHERE userID=:id";
             $stmt=$db->db->prepare($sql);
-            $stmt->execute(['nom'=>$user['nom'],'prenom'=>$user['prenom'],'password'=>$user['password'],'email'=>$user['email'],'sexe'=>$user['sexe'],'dateNaissance'=>$user['dateNaissance'],'id'=>$user['id']]);
+            $stmt->execute(['nom'=>$user['nom'],'prenom'=>$user['prenom'],'email'=>$user['email'],'sexe'=>$user['sexe'],'dateNaissance'=>$user['dateNaissance'],'id'=>$user['id']]);
             $db->disconnect();
         }
         public function deleteUser($id){
@@ -68,15 +68,13 @@
         }	
         public function login($email,$password){
             $db=new database();
-            $sql="SELECT * FROM utilisateur WHERE email=:email";
+            $sql="SELECT * FROM utilisateur WHERE email=:email AND mdp=:password";
             $stmt=$db->db->prepare($sql);
-            $stmt->execute(['email'=>$email]);
+            $stmt->execute(['email'=>$email,'password'=>$password]);
             $result=$stmt->fetch();
             if($result){
-                if(password_verify($password,$result['mdp'])){
                     $db->disconnect();
                     return $result;
-                }
             }
             $db->disconnect();
             return false;
@@ -93,7 +91,7 @@
             }
             $sql="INSERT INTO utilisateur (nom,prenom,mdp,email,sexe,dateNaissance,state) VALUES (:nom,:prenom,:password,:email,:sexe,:dateNaissance,:state)";
             $stmt=$db->db->prepare($sql);
-            $stmt->execute(['nom'=>$user['nom'],'prenom'=>$user['prenom'],'password'=>password_hash($user['password'],PASSWORD_DEFAULT),'email'=>$user['email'],'sexe'=>$user['sexe'],'dateNaissance'=>$user['dateNaissance'],'state'=>0]);
+            $stmt->execute(['nom'=>$user['nom'],'prenom'=>$user['prenom'],'password'=>$user['password'],'email'=>$user['email'],'sexe'=>$user['sexe'],'dateNaissance'=>$user['dateNaissance'],'state'=>0]);
             $userID=$db->db->lastInsertId();
             $db->disconnect();
             return $userID;

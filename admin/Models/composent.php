@@ -20,10 +20,19 @@
         }
         public function addModeCuisson($mode){
             $db=new database();
+            $sql='SELECT * from modecuisson where titre=:mode';
+            $stmt=$db->db->prepare($sql);
+            $stmt->execute(['mode'=>$mode]);
+            $result=$stmt->fetch();
+            if($result){
+                return $result['modeID'];
+            }
             $sql="INSERT INTO modecuisson (titre) VALUES (:mode)";
             $stmt=$db->db->prepare($sql);
             $stmt->execute(['mode'=>$mode]);
+            $modeID=$db->db->lastInsertId();
             $db->disconnect();
+            return $modeID;
         }
         public function deleteModeCuisson($id){
             $db=new database();
@@ -58,11 +67,11 @@
             return $result;
         }
         // delete composent
-        public function deleteComposent($recetteID,$ingredientID){
+        public function deleteComposent($recetteID){
             $db=new database();
-            $sql="DELETE FROM composent WHERE recetteID=:recetteID and ingredientID=:ingredientID";
+            $sql="DELETE FROM composent WHERE recetteID=:recetteID ";
             $stmt=$db->db->prepare($sql);
-            $stmt->execute(['recetteID'=>$recetteID,'ingredientID'=>$ingredientID]);
+            $stmt->execute(['recetteID'=>$recetteID]);
             $db->disconnect();
         }
         // update composent

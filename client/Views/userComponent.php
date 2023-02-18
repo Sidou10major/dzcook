@@ -1,10 +1,8 @@
 <?php
 class userComponents
 {
-    // Contante attribute that hold the keywords of our website
-    const KEYS = "dz, algerian, food, recipe";
+    
 
-    // All the views has a function Head that hold the title and description
     public function head($title, $description)
     {
 ?>
@@ -16,16 +14,14 @@ class userComponents
             <meta http-equiv="pragma" content="no cache" />
             <title><?php echo $title ?></title>
             <meta name="description" content=<?php echo $description ?> />
-            <meta name="keywords" content=<?php echo self::KEYS ?> />
-            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-            <link rel="stylesheet" href="style.css">
-            <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+            <link rel="stylesheet" href="style.php">
+            <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
             <script src="index.js"></script>
         </head>
     <?php
     }
 
-    //All the views share the same navbar
     public function navbar()
     {
     ?>
@@ -56,11 +52,11 @@ class userComponents
 
             <div class="call-action">
                 <div class="social-media">
-                    <a href="https://www.facebook.com/profile.php?id=100086463316458">
+                    <a href="<?php echo $GLOBALS['facebook'] ?>">
                         <img src="Utils/facebook.png" alt="facebook">
                     </a>
-                    <a href="https://www.instagram.com/bollyfoodbechar/"><img src="Utils/instagram.png" alt="instagram"></a>
-                    <a href="https://www.linkedin.com/in/sid-ahmed-boudaoud-416984196/"><img src="Utils/linkedin.png" alt="linkedin" class="linkedin"></a>
+                    <a href="<?php echo $GLOBALS['instagram'] ?>"><img src="Utils/instagram.png" alt="instagram"></a>
+                    <a href="<?php echo $GLOBALS['linkedin'] ?>"><img src="Utils/linkedin.png" alt="linkedin" class="linkedin"></a>
                 </div>
 
                 <?php
@@ -79,17 +75,12 @@ class userComponents
 
     <?php
     }
-
-    // All the views share the same footer
     public function footer()
     {
     ?>
         <footer>
             <div>
                 <object data="Utils/Logo.jpg" class="footer-logo"></object>
-                <p>
-                    Vous avez besoin d'une recette ou vous en avez une géniale que vous souhaitez partager avec les familles algériennes ? Allez n'importe où car pizzaquatro est le site parfait pour vous
-                </p>
             </div>
             <div>
                 <p class="H6">
@@ -105,7 +96,7 @@ class userComponents
                     <ul>
                         <li><a href="index.php?action=listDisplay&type=recettes&saison=hiver">Saison</a></li>
                         <li><a href="index.php?action=listDisplay&type=recettes&fete=all">Fêtes</a></li>
-                        <li><a href="index.php?action=listDisplay&type=nutrition">Nutrution</a></li>
+                        <li><a href="index.php?action=listDisplay&type=nutrition">Nutrition</a></li>
                         <li><a href="index.php?action=contactDisplay">contact us</a></li>
                     </ul>
                 </div>
@@ -113,16 +104,15 @@ class userComponents
             <div>
                 <p class="H6">Social Media</p>
                 <div class="footer-social-media">
-                    <a href="https://www.facebook.com/profile.php?id=100086463316458"><img src="Utils/facebook.png" alt="facebook">pizzaquatroOrg</a>
-                    <a href="https://www.instagram.com/bollyfoodbechar/"><img src="Utils/instagram.png" alt="instagram">pizzaquatro01</a>
-                    <a href="https://www.linkedin.com/in/sid-ahmed-boudaoud-416984196/"><img src="Utils/linkedin.png" alt="linkedin" class="linkedin">pizzaquatroOrg</a>
+                    <a href="<?php echo $GLOBALS['facebook'] ?>"><img src="Utils/facebook.png" alt="facebook">dzcook</a>
+                    <a href="<?php echo $GLOBALS['instagram'] ?>"><img src="Utils/instagram.png" alt="instagram">Dz_cook</a>
+                    <a href="<?php echo $GLOBALS['linkedin'] ?>"><img src="Utils/linkedin.png" alt="linkedin" class="linkedin">Dz Cook</a>
                 </div>
             </div>
         </footer>
     <?php
     }
 
-    // Many of our views use similair Card
     public function card($Card, $type)
     {
     ?>
@@ -150,13 +140,17 @@ class userComponents
                                                                     echo $type . '&id=' . $Card['id'];
                                                                 } ?>" class="prm-btn">lire la suite</a>
             <?php
+            } else if ($Card['healthy'] == 1) {
+            ?>
+                <p class="Secondary-btn"><?php echo "Healthy"  ?></p>
+            <?php
             }
+
             ?>
         </div>
     <?php
     }
 
-    //Swiper
     public function swipper($List)
     {
     ?>
@@ -201,11 +195,10 @@ class userComponents
                 ?>
             </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" ></script>
     <?php
     }
 
-    //Categories
     public function categories($List)
     {
     ?>
@@ -344,6 +337,23 @@ class userComponents
                         <label for="star1" title="text">1 star</label>
                         </from>
                 </div>
+                <script>
+                    $('.rate>input').click(function(e) {
+                        let id = $(this).parent().find('input[name="id"]').val();
+                        let rate = $(this).val();
+                        data = {
+                            id: id,
+                            note: rate
+                        }
+                        $.post({
+                            url: "index.php?action=rateRecipe",
+                            data: data,
+                            success: function(response) {
+                                location.reload();
+                            }
+                        });
+                    })
+                </script>
             <?php
             }
             ?>
@@ -525,7 +535,11 @@ class userComponents
                     foreach ($keys as $key) {
                         if ($filter[$key] != "") {
                     ?>
-                            <button class="secondary-btn"><?php if(is_array($filter[$key])){echo $key;}else{echo $key .''.$filter[$key];} ?></button>
+                            <button class="secondary-btn"><?php if (is_array($filter[$key])) {
+                                                                echo $key;
+                                                            } else {
+                                                                echo $key . '' . $filter[$key];
+                                                            } ?></button>
                 <?php
                         }
                     }
@@ -547,7 +561,7 @@ class userComponents
     ?>
         <div class="profile">
             <div class="profile-header">
-                <img src="Utils/assets/pdp.png" alt="pdp">
+                <img src="Utils/assets/pdp.jpg" alt="pdp">
                 <div class="horizontale-container">
                     <div class="profile-info">
                         <p class="H4"><?php echo $profile['nom'] . " " . $profile['prenom'] ?></p>
@@ -718,7 +732,6 @@ class userComponents
     }
     public function contact()
     {
-        //contact page that has social media links 
     ?>
         <div class="horizontale-container">
             <div class="contact-header">
@@ -728,21 +741,21 @@ class userComponents
                 <h1>Contactez-nous</h1>
                 <div class="verticale-container">
                     <div class="horizantale-container">
-                        <a href="https://www.facebook.com/profile.php?id=100086463316458">
+                        <a href="https://www.facebook.com/">
                             <object data="Utils/facebook.png" class="social-media-icon"></object>
-                            pizzaquatro
+                            Dz Cook
                         </a>
                     </div>
                     <div class="horizantale-container">
-                        <a href="https://www.instagram.com/bollyfoodbechar/">
+                        <a href="https://www.instagram.com/">
                             <object data="Utils/instagram.png" class="social-media-icon"></object>
-                            pizzaquatro
+                            Dz_Cook
                         </a>
                     </div>
                     <div class="horizantale-container">
-                        <a href="https://www.linkedin.com/in/sid-ahmed-boudaoud-416984196/">
+                        <a href="https://www.linkedin.com/">
                             <object data="Utils/linkedin.png" class="social-media-icon"></object>
-                            pizzaquatro
+                            Dz Cook
                         </a>
                     </div>
                     <div class="horizantale-container">

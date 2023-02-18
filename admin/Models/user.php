@@ -10,6 +10,13 @@
             $db->disconnect();
             return $result;
         }
+        public function updateUser($user){
+            $db=new database();
+            $sql="UPDATE utilisateur SET nom=:nom,prenom=:prenom,email=:email,sexe=:sexe,dateNaissance=:dateNaissance WHERE userID=:id";
+            $stmt=$db->db->prepare($sql);
+            $stmt->execute(['nom'=>$user['nom'],'prenom'=>$user['prenom'],'email'=>$user['email'],'sexe'=>$user['sexe'],'dateNaissance'=>$user['dateNaissance'],'id'=>$user['id']]);
+            $db->disconnect();
+        }
         public function deleteUser($id){
             $db=new database();
             $sql="DELETE FROM utilisateur WHERE userID=:id";
@@ -31,13 +38,6 @@
             $stmt->execute(['id'=>$id]);
             $db->disconnect();
         }	
-        public function editUser($user){
-            $db=new database();
-            $sql="UPDATE utilisateur SET nom=:nom,prenom=:prenom,email=:email,dateNaissance=:dateNaissance,sexe=:sexe WHERE userID=:id";
-            $stmt=$db->db->prepare($sql);
-            $stmt->execute(['id'=>$user['id'],'nom'=>$user['nom'],'prenom'=>$user['prenom'],'email'=>$user['email'],'dateNaissance'=>$user['dateNaissance'],'sexe'=>$user['sexe']]);
-            $db->disconnect();
-        }
+       
     }
-
 ?>
